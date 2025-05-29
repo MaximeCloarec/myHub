@@ -1,0 +1,23 @@
+{
+  "name": "myhub",
+  "version": "1.0.0",
+  "description": "A home made Hub",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaximeCloarec/myHub.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaximeCloarec/myHub/issues"
+  },
+  "homepage": "https://github.com/MaximeCloarec/myHub#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
