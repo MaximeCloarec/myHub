@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Food List</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🥗 Food List</h1>
+
+            <form id="foodForm">
+                <div class="form-group">
+                    <label for="foodName">Nom :</label>
+                    <input type="text" id="foodName" name="foodName" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="foodQuantity">Quantité :</label>
+                    <input
+                        type="number"
+                        id="foodQuantity"
+                        name="foodQuantity"
+                        required
+                    />
+                </div>
+
+                <button id="submitForm" type="submit">Ajouter</button>
+            </form>
+
+            <div id="result" class="message"></div>
+
+            <h2>📋 Liste actuelle :</h2>
+            <div id="foodLists" class="food-list"></div>
+        </div>
+    </body>
+</html>
