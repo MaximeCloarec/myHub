@@ -6,6 +6,24 @@
         <title>Food List</title>
         <link rel="stylesheet" href="style.css" />
         <script src="script.js" defer></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io();
+
+            socket.on("connect", () => {
+                console.log("🟢 Connecté au WebSocket");
+            });
+
+            socket.on("foodAdded", (food) => {
+                console.log("🍎 Aliment ajouté :", food);
+                addFoodToList(food);
+            });
+
+            socket.on("foodDeleted", (id) => {
+                console.log("❌ Aliment supprimé :", id);
+                removeFoodFromList(id);
+            });
+        </script>
     </head>
     <body>
         <div class="container">

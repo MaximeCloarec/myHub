@@ -1,7 +1,13 @@
 const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
 const path = require("path");
+
 const app = express();
-const port = 3050;
+const port = 3050; // Port d'écoute de l'application
+
+const server = http.createServer(app); // Création du serveur HTTP
+const io = new Server(server); //WebSocket server
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,12 +19,23 @@ app.get("/", (req, res) => {
 });
 
 // App FoodList
+const foodListRouter = require("./apps/foodList/app.js")(io);
 app.use(
     "/foodList",
     express.static(path.join(__dirname, "apps", "foodList", "public"))
 );
-app.use("/foodList", require("./apps/foodList/app.js"));
+app.use("/foodList", foodListRouter);
 
-app.listen(port, () => {
+// App MyHub
+server.listen(port, () => {
     console.log("MyHub is running on port " + port);
+});
+
+// WebSocket server
+io.on("connection", (socket) => {
+    console.log("A user connected");
+    // Handle disconnection
+    socket.on("disconnect", () => {
+        console.log("A user disconnected");
+    });
 });
