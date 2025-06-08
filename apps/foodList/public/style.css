@@ -22,6 +22,25 @@ h1 {
     color: #2c3e50;
 }
 
+/* NAVIGATION */
+nav {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background 0.3s ease, color 0.3s ease;
+    background: #123524;
+}
+
 /* FORM */
 form {
     background: #ffffff;
