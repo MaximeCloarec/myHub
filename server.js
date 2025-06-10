@@ -9,6 +9,18 @@ const port = 3050; // Port d'écoute de l'application
 const server = http.createServer(app); // Création du serveur HTTP
 const io = new Server(server); //WebSocket server
 
+//Limiter les requêtes pour éviter les abus
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limite chaque IP à 100 requêtes par fenêtre
+    message: "Trop de requêtes, veuillez réessayer plus tard.",
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+app.use(limiter); // Appliquer le rate limiting
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

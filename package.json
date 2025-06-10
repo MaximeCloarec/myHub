@@ -19,6 +19,7 @@
   "homepage": "https://github.com/MaximeCloarec/myHub#readme",
   "dependencies": {
     "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
     "socket.io": "^4.8.1",
     "sqlite3": "^5.1.7"
   }
