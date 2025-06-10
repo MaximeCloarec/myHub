@@ -1,6 +1,7 @@
 const form = document.getElementById("foodForm");
 const resultDiv = document.getElementById("result");
 const foodListDiv = document.getElementById("foodLists");
+const downloadButton = document.getElementById("listDownload");
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -35,6 +36,32 @@ form.addEventListener("submit", async (event) => {
         }
     } catch (err) {
         resultDiv.textContent = "Erreur réseau ou serveur.";
+    }
+});
+
+downloadButton.addEventListener("click", () => {
+    const contenu = [];
+    // Vérifie si la liste est vide
+    if (foodListDiv.children.length === 0) {
+        resultDiv.textContent = "La liste est vide.";
+        return;
+    }
+    // Récupère les aliments de la liste
+    if (confirm("Êtes-vous sûr de vouloir télécharger la liste ?")) {
+        for (const item of foodListDiv.children) {
+            const food = item.querySelector("span").textContent;
+            contenu.push(`${food}`);
+        }
+
+        // Crée un blob avec le contenu
+        const blob = new Blob([contenu.join("\n")], { type: "text/plain" });
+        // Crée un lien pour télécharger le fichier
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Ma_liste.txt";
+        a.click();
+        URL.revokeObjectURL(url); // Nettoyage
     }
 });
 
