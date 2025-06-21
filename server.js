@@ -46,8 +46,21 @@ server.listen(port, () => {
 // WebSocket server
 io.on("connection", (socket) => {
     console.log("A user connected");
-    // Handle disconnection
+
+    let inactivityTimer = setTimeout(() => {
+        console.log("Disconnecting inactive user...");
+        socket.disconnect(true);
+    }, 5 * 60 * 1000); // 5 minutes
+
+    socket.on("activity", () => {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+            socket.disconnect(true);
+        }, 5 * 60 * 1000);
+    });
+
     socket.on("disconnect", () => {
+        clearTimeout(inactivityTimer);
         console.log("A user disconnected");
     });
 });
